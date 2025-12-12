@@ -13,14 +13,14 @@ The simulation reveals that while standard **ECMP suffers catastrophic packet lo
 
 ### 🚀 Key Findings
 1.  **The ECMP Collapse:** Under 100% load (permutation traffic), ECMP experiences massive hash collisions, leading to a **>90% drop rate** and a retransmission storm.
-2.  **The Spraying Trade-off:** Blind Packet Spraying resolves hotspots but introduces **Head-of-Line (HOL) Blocking**, increasing P99 tail latency by **~100x** (up to 20ms) due to reordering buffers at the receiver.
-3.  **Adaptive Routing Victory:** Queue-aware local adaptive routing (UGAL-L style) reduces drops to **<1%** while maintaining low latency (~180µs) under standard loads.
+2.  **The Spraying Trade-off:** Blind Packet Spraying resolves hotspots but introduces **Head-of-Line (HOL) Blocking**, increasing P99 tail latency by **~200x** (up to 50ms) due to reordering buffers at the receiver.
+3.  **Adaptive Routing Victory:** Queue-aware local adaptive routing (UGAL-L style) reduces drops to **<12%** while maintaining low latency (~300µs) under standard loads.
 4.  **Congestion Control Necessity:** In "Crush" scenarios (200% oversubscription), even Adaptive Routing fails without Congestion Control. Adding an ECN-based loop (DCTCP-style) restores stability.
 
 ### 🛠️ Architecture
 The simulator is modular, implementing the following network layers:
 
-* **Topology:** $k=8$ Fat-Tree (128 Servers, 80 Switches) with 25Gbps links.
+* **Topology:** $k=8$ Fat-Tree (128 Servers, 80 Switches) with 4Gbps links.
 * **Routing Engines:**
     * `ECMP`: Flow-based hashing (Standard).
     * `SPRAY`: Per-packet Round-Robin (Load Balancing).
