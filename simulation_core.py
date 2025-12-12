@@ -565,5 +565,5 @@ def run_experiment_batch():
     return pd.DataFrame(results)
 
 # Run and store
-if __name__ == 'main':
+if __name__ == "__main__":
     df_results = run_experiment_batch()
